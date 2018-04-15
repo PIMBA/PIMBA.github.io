@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>YHWang&#39;s Memo</title>
+  <title>Rabbit MQ 开箱试玩 | YHWang&#39;s Memo</title>
   
   
   <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
@@ -47,29 +47,14 @@
 
     <div class="container">
         <div data-pager-shell>
-            <ul class="Index">
-  
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/04/12/RabbitMQ开箱试玩/">Rabbit MQ 开箱试玩</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-04-12T14:25:35.000Z" itemprop="datePublished">
-    2018-04-12
-  </time>
-  
-  
-</div>
-
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>Rabbit MQ 开箱试玩</h1>
     </header>
-    <div>
-      
-        <h1 id="什么是MQ"><a href="#什么是MQ" class="headerlink" title="什么是MQ"></a>什么是MQ</h1><p>MQ = Message Queue ,中文名为消息队列。是一种进程间或不同的线程间进行通讯的一种方式。<br>在实际的生产当中，我们常常需要用到消息队列对消息生产者和消息消费者进行解耦，提升系统的稳定新或性能。<br>从字面上理解消息队列非常容易，它只是一个队列，存放消息发送者发送的消息，等待消费者进行消费，但现代的消息队列产品提供了更多的功能，包括集群化，高可用性主备模式，消息广播等等功能。</p>
+
+    <section>
+      <h1 id="什么是MQ"><a href="#什么是MQ" class="headerlink" title="什么是MQ"></a>什么是MQ</h1><p>MQ = Message Queue ,中文名为消息队列。是一种进程间或不同的线程间进行通讯的一种方式。<br>在实际的生产当中，我们常常需要用到消息队列对消息生产者和消息消费者进行解耦，提升系统的稳定新或性能。<br>从字面上理解消息队列非常容易，它只是一个队列，存放消息发送者发送的消息，等待消费者进行消费，但现代的消息队列产品提供了更多的功能，包括集群化，高可用性主备模式，消息广播等等功能。</p>
 <h1 id="为什么使用MQ"><a href="#为什么使用MQ" class="headerlink" title="为什么使用MQ"></a>为什么使用MQ</h1><p>要解释为什么使用MQ，我们可以以一个故事来阐述：</p>
 <blockquote>
 <p>小明是一个大懒虫，不喜欢读书，但小明的姐姐小红是很喜欢读书。为了督促小明学习，小红决定每个月给小明一本书让他看完。<br>第一个月，小红给了小明第一本书，<strong>并看着他把这本书读完了</strong>。<br>第二个月，小红给了小明第二本书，<strong>并看着他把这本书读完了</strong>。<br>第三个月，小红觉得老是看着他读不是一个办法，她决定把第三本书交给小明，并约定下个月给他下一本。<br>第四个月，小明因为偷懒没有看完第三本书，小红开始<strong>每天问他什么时候能够看完</strong>。<br>这时，小红觉得老是这样问不是个办法，她决定每个月<strong>将书放在小明房间门口的书架上，并让小明把读书笔记也放在书架上</strong>。<br>这样，小红可以每天读她自己的书，时不时的去看看读书笔记还在不在，并将下一本书放在书架上即可。</p>
@@ -151,41 +136,26 @@
 <p>还有几个概念是上述图中没有标明的，那就是Connection（连接），Channel（通道，频道）。<br>Connection： 就是一个TCP的连接。Producer和Consumer都是通过TCP连接到RabbitMQ Server的。以后我们可以看到，程序的起始处就是建立这个TCP连接。<br>Channels： 虚拟连接。它建立在上述的TCP连接中。数据流动都是在Channel中进行的。也就是说，一般情况是程序起始建立TCP连接，第二步就是建立这个Channel。</p>
 </blockquote>
 
+
       
-    </div>
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-04-12T14:25:35.000Z" itemprop="datePublished">
+              2018-04-12
+            </time>
+          </div>
+          
+      </section>
+    
+    
 </article>
 
-    </li>
-  
-    <li>
-      <article class='ListView'>
-    <header class="title">
-      
-        <h1>
-          <a href="/2018/04/11/hello-blog/">hello blog</a>
-        </h1>
-      
-      <div class='ListMeta'>
-  <time datetime="2018-04-11T14:57:01.000Z" itemprop="datePublished">
-    2018-04-11
-  </time>
-  
   
 </div>
-
-    </header>
-    <div>
-      
-        <p>hi ,年纪大了，记性不好，好多事情记不得，每次都去查很麻烦，姑且放在这里当个备忘录。</p>
-
-      
-    </div>
-</article>
-
-    </li>
-  
-</ul>
-
 
             <footer>
     <div>© 2016 - YHWang </div>
