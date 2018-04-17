@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CentOS安装.netcore应用 | YHWang&#39;s Memo</title>
+  
+  
+  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css"-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.10.0/styles/github-gist.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="Shell">
+    <aside class='SideBar'>
+    <section class='avatar' style="background-image: url()">
+        <div class='av-pic' style="background-image: url(https://avatars1.githubusercontent.com/u/7321731?s=400&amp;u=3f56f1e0ba569599741bcc9dfda1fc4d64a49ac7&amp;v=4)">
+        </div>
+    </section>
+    <section class='menu'>
+        <div>YHWang&#39;s Memo</div>
+        
+        <ul>
+          
+            <a href="/" class="Btn">
+              <li>Home</li>
+            </a>  
+          
+            <a href="/archives/" class="Btn">
+              <li>Archive</li>
+            </a>  
+          
+        </ul>
+    </section>
+    <section class="media">
+        
+            
+                <a href="https://github.com/PIMBA">
+                    <img src="/assets/github.svg" />
+                </a>
+            
+        
+    </section>
+</aside>
+
+    <div class="container">
+        <div data-pager-shell>
+            <div>
+  <article class='ContentView'>
+    <header class='PageTitle'>
+        <h1>CentOS安装.netcore应用</h1>
+    </header>
+
+    <section>
+      <p>本文大部分的内容来自<a href="https://www.microsoft.com/net/learn/get-started/linux/centos" target="_blank" rel="noopener">msdn</a></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>订阅.net 产品</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https://packages.microsoft.com/keys/microsoft.asc</span><br><span class="line">sh -c 'echo -e "[packages-microsoft-com-prod]\nname=packages-microsoft-com-prod \nbaseurl= https://packages.microsoft.com/yumrepos/microsoft-rhel7.3-prod\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" &gt; /etc/yum.repos.d/dotnetdev.repo'</span><br></pre></td></tr></table></figure>
+<p>安装.net sdk</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install libunwind libicu</span><br><span class="line">yum install dotnet-sdk-2.1.104</span><br></pre></td></tr></table></figure>
+<h1 id="制作服务"><a href="#制作服务" class="headerlink" title="制作服务"></a>制作服务</h1><p>在<code>/etc/systemd/system/</code>中新建一个服务文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/systemd/system/kestrel-ntmvc.service</span><br></pre></td></tr></table></figure>
+<p>在文件中添加</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=Example .NET Web MVC Application running <span class="literal">on</span> Centos7</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">WorkingDirectory</span>=~/webapp/</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/bin/dotnet ~/webapp/CommVote/bin/Release/netcoreapp2.<span class="number">0</span>/publish/vote.dll</span><br><span class="line"><span class="attr">Restart</span>=always</span><br><span class="line"><span class="attr">RestartSec</span>=<span class="number">10</span>  # Restart service after <span class="number">10</span> seconds if dotnet service crashes</span><br><span class="line"><span class="attr">SyslogIdentifier</span>=dotnet-example</span><br><span class="line"><span class="attr">User</span>=root</span><br><span class="line"><span class="attr">Environment</span>=ASPNETCORE_ENVIRONMENT=Production</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>启用服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable kestrel-ntmvc.service</span><br><span class="line">systemctl start kestrel-ntmvc.service</span><br><span class="line">systemctl status kestrel-ntmvc.service</span><br></pre></td></tr></table></figure>
+
+      
+
+    </section>
+    
+      <section class='ArticleMeta'>
+          <div>
+            发布于&nbsp;
+            <time datetime="2018-04-17T01:56:08.000Z" itemprop="datePublished">
+              2018-04-17
+            </time>
+          </div>
+          
+      </section>
+    
+    
+</article>
+
+  
+</div>
+
+            <footer>
+    <div>© 2016 - YHWang </div>
+    <div>
+    Powered by Hexo
+    </div>
+</footer>
+
+        </div>
+    </div>
+</div>
+<script src="/js/pager/dist/singlepager.js"></script>
+<script>
+var sp = new Pager('data-pager-shell')
+
+</script>
+</body>
+</html>
